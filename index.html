@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luigi Benvisto, AIC — Cinematographer</title>
+<meta name="description" content="Luigi Benvisto is a cinematographer, director and screenwriter, member of the Italian Society of Cinematographers (AIC), European IMAGO and Associate Member of the Society of Camera Operators (SOC). Award-winning DP with credits at the Venice Biennale and in consideration for the Academy Awards.">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --white: #ffffff;
+    --dim: rgba(255,255,255,0.6);
+    --panel: rgba(0,0,0,0.72);
+    --panel-quote: rgba(0,0,0,0.52);
+  }
+
+  body {
+    background: #000;
+    color: var(--white);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.04em;
+    overflow-x: hidden;
+  }
+
+  /* ── PAGES ── */
+  .page {
+    display: none !important;
+    min-height: 100vh;
+    position: relative;
+  }
+  .page.active {
+    display: block !important;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: var(--panel);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    gap: 1rem;
+  }
+  .nav-brand { line-height: 1.35; white-space: nowrap; }
+  .nav-brand strong {
+    display: block;
+    font-size: 1.1em;
+    letter-spacing: 0.12em;
+    font-weight: 600;
+  }
+  .nav-brand span {
+    font-size: 0.88em;
+    color: var(--dim);
+    letter-spacing: 0.08em;
+  }
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  .nav-links a {
+    color: var(--white);
+    text-decoration: none;
+    font-size: 0.95em;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .nav-links a:hover { opacity: 0.5; }
+
+  /* ── HOME ── */
+  #page-home {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    background: #000;
+  }
+  .reel-wrap {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+  .reel-wrap iframe {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    height: 56.25vw;
+    min-height: 100vh;
+    min-width: 177.78vh;
+    pointer-events: none;
+    border: none;
+  }
+  .reel-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.25);
+  }
+  .quote-wrap {
+    position: absolute;
+    bottom: 8vh;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 90%;
+    max-width: 520px;
+    background: var(--panel-quote);
+    padding: 1.6rem 2rem;
+    line-height: 1.9;
+    backdrop-filter: blur(3px);
+  }
+  .quote-wrap p {
+    font-style: italic;
+    font-size: 1.05em;
+    letter-spacing: 0.04em;
+  }
+  .quote-wrap cite {
+    display: block;
+    margin-top: 0.6rem;
+    font-style: normal;
+    font-size: 0.9em;
+    color: var(--dim);
+    letter-spacing: 0.1em;
+  }
+
+  /* ── BIOGRAPHY ── */
+  #page-biography {
+    background: #0a0a0a;
+    padding-top: 80px;
+    min-height: 100vh;
+    position: relative;
+  }
+  .bio-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: url('LB_back.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.2;
+  }
+  .bio-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 4rem 2rem 6rem;
+    line-height: 1.9;
+    font-size: 1.05em;
+    color: rgba(255,255,255,0.88);
+  }
+  .bio-inner h1 {
+    font-size: 0.88em;
+    letter-spacing: 0.2em;
+    color: var(--dim);
+    margin-bottom: 2.5rem;
+    font-weight: 400;
+  }
+  .bio-inner p { margin-bottom: 1.4rem; }
+
+  /* ── CONTACT ── */
+  #page-contact {
+    background: #0a0a0a;
+    padding-top: 80px;
+    min-height: 100vh;
+    position: relative;
+  }
+  .contact-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: url('LB_back.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.35;
+  }
+  .contact-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 80px);
+    flex-wrap: wrap;
+    gap: 3rem;
+    padding: 3rem 2rem;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .contact-block {
+    background: var(--panel);
+    padding: 2.4rem 2.8rem;
+    min-width: 260px;
+    flex: 1;
+    line-height: 2.2;
+    backdrop-filter: blur(4px);
+  }
+  .contact-block h2 {
+    font-size: 0.85em;
+    letter-spacing: 0.2em;
+    color: var(--dim);
+    margin-bottom: 1.2rem;
+    font-weight: 400;
+  }
+  .contact-block p { font-size: 1em; line-height: 2; }
+  .contact-block a {
+    color: var(--white);
+    text-decoration: none;
+    display: block;
+  }
+  .contact-block a:hover { opacity: 0.6; }
+
+  /* ── MOBILE ── */
+  @media (max-width: 640px) {
+    nav { padding: 0.8rem 1.2rem; }
+    .nav-links { gap: 1.2rem; }
+    .quote-wrap { padding: 1.2rem 1.4rem; bottom: 5vh; }
+    .bio-inner { padding: 2.5rem 1.4rem 4rem; }
+    .contact-inner { gap: 1.5rem; padding: 2rem 1rem; }
+    .contact-block { padding: 1.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">
+    <strong>LUIGI BENVISTO, AIC</strong>
+    <span>Storyteller</span>
+  </div>
+  <div class="nav-links">
+    <a onclick="showPage('home')">Home</a>
+    <a onclick="showPage('biography')">Biography</a>
+    <a onclick="showPage('contact')">Contact</a>
+  </div>
+</nav>
+
+<!-- HOME -->
+<div id="page-home" class="page active">
+  <div class="reel-wrap">
+    <iframe
+      src="https://player.vimeo.com/video/684345004?autoplay=1&muted=1&loop=1&background=1&quality=auto"
+      allow="autoplay; fullscreen"
+      allowfullscreen>
+    </iframe>
+  </div>
+  <div class="reel-overlay"></div>
+  <div class="quote-wrap">
+    <p>"Three things I love: my wife, cinematography and my mama's homemade olive all'ascolana."</p>
+    <cite>— Luigi Benvisto</cite>
+  </div>
+</div>
+
+<!-- BIOGRAPHY -->
+<div id="page-biography" class="page">
+  <div class="bio-bg"></div>
+  <div class="bio-inner">
+    <h1>BIOGRAPHY</h1>
+    <p>Born in Varese, Italy, on November 27, 1981, my mother remembers me as a curious, smiling baby, capable of staring at the same toy for hours or napping like a pro.</p>
+    <p>By six, I was wearing hearing aids, adjusting to a world that suddenly buzzed and clicked. Sound became overrated; my eyes told better stories. Books, comics and films became my refuge. My dad introduced me to Hans Christian Andersen's The Steadfast Tin Soldier and I made him read it again… and again… and again.</p>
+    <p>The '80s weren't just about neon colors and questionable fashion; they were the era of personal computers. My dad brought home a Commodore Plus/4 and I learned how to load games with the intensity of a kid who believed it would change everything. The frustration of loading times never got old, though Arkanoid was my religion. When we upgraded to a Pentium, I couldn't wait to open it up with a screwdriver. Curiosity turned into a job at K-Computers, where I built PCs for a paycheck and took them apart for fun.</p>
+    <p>Cinema hooked me early. My dad took me to parish halls with wooden chairs and white walls pretending to be screens. Those flickering images changed everything. By high school, I was writing stories, drawing comic strips and designing covers for the school magazine.</p>
+    <p>At 17, I joined a theater company. Medieval comedies, slapstick and Italian farce… it didn't matter as long as I could make people laugh. Over the next decade, I performed across Italy, learning how to tell stories on stage.</p>
+    <p>At 25, my parents gave me a video camera. It was a revelation. My first film was 58 seconds long, experimental and somehow won me a trophy. Living in a garage on the outskirts of Rome, I joined another theater troupe, acted in plays and wrote Le Chat Noir, a cabaret show that earned a nod from critic Nicola Fano. Rome, with its chaos and beauty, became my creative playground. I started shooting casting videos for friends, but blank backdrops didn't inspire me. I turned auditions into short films. That caught a producer's eye and suddenly I was on a film set. I pitched a short, a comedy-detective hybrid and roped in Mario Monicelli for a cameo.</p>
+    <p>In 2008, I won a scholarship to the New York Film Academy. I landed in New York with no English, no place to stay and no clear plan, but I was 27 and the world was mine to explore. Film school became my second home. In one year, I worked on nearly 50 projects, crisscrossing the country and collaborating with filmmakers from all over the world. Since then, my camera has taken me everywhere: Alaska, the Maldives, France, Japan… you name it, I've been there.</p>
+    <p>In 2016, I was the cinematographer of Cloud Kumo, which won the Student Academy Silver Prize and the Golden Eagle Award. Visiting the ASC Clubhouse and meeting legends like Dean Cundey, Richard Crudo and Michael Goi felt like stepping into a dream, standing in the shadow of giants.</p>
+    <p>In 2018, I married Courtney, the woman who keeps my world in focus and my feet on the ground. We moved back to Italy for a time, where I worked on TV shows and commercials. Then, in early 2020, we returned to the U.S., just in time for the world to stop spinning.</p>
+    <p>Mentored by Michael Slovis, ASC and Richard Crudo, ASC, my passion for storytelling only grew stronger. The projects I worked on have been screened at prestigious festivals like the Biennale of Venice, Sundance and Cannes. I've shot in frozen tundras, scorching deserts and places that don't exist on any map. I've survived 21-hour shoots, gunpoints at location scouting and buildings on fire. And I'd do it again in a heartbeat.</p>
+    <p>In January 2025, sixteen years after arriving in the U.S. with nothing but a suitcase and a dream, I became a citizen. The next year, my wife and I moved from New York to Virginia.</p>
+    <p>This life has been quite a movie: comedy, drama, action and every other genre you can imagine. Yes, including sci-fi, because when I was born, I was using rotary landline phones and CRT televisions, while now I talk to an artificial intelligence and I swipe in the air like I'm training for Hogwarts.</p>
+    <p>So, yeah, for someone born in the '80s in a small town on the Italian Alps, it's been a journey.</p>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div id="page-contact" class="page">
+  <div class="contact-bg"></div>
+  <div class="contact-inner">
+    <div class="contact-block">
+      <h2>CONTACT</h2>
+      <p>
+        Luigi Benvisto, AIC<br>
+        <a href="mailto:luigibenvisto@gmail.com">luigibenvisto@gmail.com</a>
+        <a href="tel:+14343278904">+1 434-327-8904</a>
+        <a href="https://luigibenvisto.com" target="_blank">luigibenvisto.com</a>
+        <a href="https://www.instagram.com/luigibenvisto_aic/" target="_blank">Instagram</a>
+      </p>
+    </div>
+    <div class="contact-block">
+      <h2>ITALIAN LEGAL REPRESENTATION</h2>
+      <p>
+        A/C Studio Legale<br>
+        Avv. Edgardo Altieri<br>
+        <a href="mailto:segreteria@acstudiolegale.net">segreteria@acstudiolegale.net</a>
+        <a href="tel:+390631070288">+39 06 31070288</a>
+        <a href="https://www.acstudiolegale.net" target="_blank">acstudiolegale.net</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(function(p) {
+    p.classList.remove('active');
+  });
+  document.getElementById('page-' + name).classList.add('active');
+  window.scrollTo(0, 0);
+}
+</script>
+
+</body>
+</html>
